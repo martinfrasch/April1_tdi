@@ -16,6 +16,7 @@ from bokeh.models import ColumnDataSource, CustomJS
 from bokeh.models.widgets import Button, RadioButtonGroup, Select, RangeSlider,Tabs,Panel
 from bokeh.models.tools import HoverTool
 from bokeh.models import NumeralTickFormatter
+from bokeh.util.browser import view
 
 
 output_file("king_tdi.html") 
@@ -212,3 +213,4 @@ tabs = Tabs(tabs=[ tab1, tab2, tab3, tab4, tab5, tab6, tab7 ])
 
 show(tabs)
 
+view(outputfile)
