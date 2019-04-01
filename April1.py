@@ -65,7 +65,7 @@ N_single = 30 *12
 I_single = 5/100
 
 #print("Your monthly payment will be: ") accounting for 10% tax spread over 12 months
-M_single = (L/N) + I*(L/N)+(0.1*df_listing_single)/12
+M_single = (L_single/N_single) + I_single*(L_single/N_single)+(0.1*df_listing_single)/12
 
 delta_single=M_single-df_rental_single
 
@@ -81,7 +81,7 @@ N_condo = 30 *12
 I_condo = 5/100
 
 #print("Your monthly payment will be: ") accounting for 10% tax spread over 12 months
-M_condo = (L/N) + I*(L/N)+(0.1*df_listing_condo)/12
+M_condo = (L_condo/N_condo) + I_condo*(L_condo/N_condo)+(0.1*df_listing_condo)/12
 
 
 #print(delta_single)
