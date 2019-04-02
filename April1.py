@@ -10,7 +10,7 @@ import numpy as np
 import datetime
 import pandas as pd
 from bokeh.io import output_file, show
-from bokeh.plotting import figure
+from bokeh.plotting import curdoc, Figure
 from bokeh.layouts import widgetbox,gridplot
 from bokeh.models import ColumnDataSource, CustomJS
 from bokeh.models.widgets import Button, RadioButtonGroup, Select, RangeSlider,Tabs,Panel
@@ -19,7 +19,7 @@ from bokeh.models import NumeralTickFormatter
 from bokeh.util.browser import view
 
 
-output_file("king_tdi.html") 
+#output_file("king_tdi.html")
 
 quandl.ApiConfig.api_key = "YayxSPq-oifg3s46Bm5y"
 
@@ -54,7 +54,7 @@ df_30y=pd.DataFrame(thirty_years_fixed_mortgage_rate)
 
 #compute rough monthly payments from a listed price single family home based on this date's mortgage
 #match the date of mortgage, take that date's interest rate - 30 years and compute the payments - for future
-#since now only looking at last year, will assume 4.5% average rate for 30 years and 
+#since now only looking at last year, will assume 4.5% average rate for 30 years and
 
 #L = input("How much will you be borrowing? ") Assume 20%
 L_single = 0.2*df_listing_single
@@ -62,7 +62,7 @@ L_single = 0.2*df_listing_single
 #N = input("How many years will you be paying this loan off? ") Assume 30 years
 N_single = 30 *12
 
-#I = input("What is the interest in percents that you will be paying? Ex, 10% = 10, 5% = 5, etc. ") Assume 5% (estimated visually from https://www.quandl.com/data/FMAC/FIX30YR-30-Year-Fix-Rate for the 2010 till now period) 
+#I = input("What is the interest in percents that you will be paying? Ex, 10% = 10, 5% = 5, etc. ") Assume 5% (estimated visually from https://www.quandl.com/data/FMAC/FIX30YR-30-Year-Fix-Rate for the 2010 till now period)
 I_single = 5/100
 
 #print("Your monthly payment will be: ") accounting for 10% tax spread over 12 months
@@ -78,7 +78,7 @@ L_condo = 0.2*df_listing_condo
 #N = input("How many years will you be paying this loan off? ") Assume 30 years
 N_condo = 30 *12
 
-#I = input("What is the interest in percents that you will be paying? Ex, 10% = 10, 5% = 5, etc. ") Assume 5% (estimated visually from https://www.quandl.com/data/FMAC/FIX30YR-30-Year-Fix-Rate for the 2010 till now period) 
+#I = input("What is the interest in percents that you will be paying? Ex, 10% = 10, 5% = 5, etc. ") Assume 5% (estimated visually from https://www.quandl.com/data/FMAC/FIX30YR-30-Year-Fix-Rate for the 2010 till now period)
 I_condo = 5/100
 
 #print("Your monthly payment will be: ") accounting for 10% tax spread over 12 months
@@ -97,7 +97,7 @@ source7=ColumnDataSource(df_30y)
 # In[62]:
 
 
-p_listing_single = figure(x_axis_type="datetime", title="King Country Median Listing Price - Single Family Residence", plot_height=350, plot_width=800)
+p_listing_single = Figure(x_axis_type="datetime", title="King Country Median Listing Price - Single Family Residence", plot_height=350, plot_width=800)
 p_listing_single.xgrid.grid_line_color=None
 p_listing_single.ygrid.grid_line_alpha=0.5
 p_listing_single.xaxis.axis_label = 'Time'
@@ -111,7 +111,7 @@ hover.tooltips=[
 p_listing_single.add_tools(hover)
 
 
-p_listing_condo = figure(x_axis_type="datetime", title="King Country Median Listing Price - Condo", plot_height=350, plot_width=800)
+p_listing_condo = Figure(x_axis_type="datetime", title="King Country Median Listing Price - Condo", plot_height=350, plot_width=800)
 p_listing_condo.xgrid.grid_line_color=None
 p_listing_condo.ygrid.grid_line_alpha=0.5
 p_listing_condo.xaxis.axis_label = 'Time'
@@ -124,7 +124,7 @@ hover.tooltips=[
 ]
 p_listing_condo.add_tools(hover)
 
-p_rental_single = figure(x_axis_type="datetime", title="King Country Median Rental Price - Single Family Residence", plot_height=350, plot_width=800)
+p_rental_single = Figure(x_axis_type="datetime", title="King Country Median Rental Price - Single Family Residence", plot_height=350, plot_width=800)
 p_rental_single.xgrid.grid_line_color=None
 p_rental_single.ygrid.grid_line_alpha=0.5
 p_rental_single.xaxis.axis_label = 'Time'
@@ -138,7 +138,7 @@ hover.tooltips=[
 p_rental_single.add_tools(hover)
 
 
-p_rental_condo = figure(x_axis_type="datetime", title="King Country Median Rental Price - Condo", plot_height=350, plot_width=800)
+p_rental_condo = Figure(x_axis_type="datetime", title="King Country Median Rental Price - Condo", plot_height=350, plot_width=800)
 p_rental_condo.xgrid.grid_line_color=None
 p_rental_condo.ygrid.grid_line_alpha=0.5
 p_rental_condo.xaxis.axis_label = 'Time'
@@ -152,7 +152,7 @@ hover.tooltips=[
 p_rental_condo.add_tools(hover)
 
 
-p_delta_single = figure(x_axis_type="datetime", title="Difference in Monthly Mortgage Payments between Median Listing and Rental Price of Single Family Residence in King Country", plot_height=350, plot_width=1200)
+p_delta_single = Figure(x_axis_type="datetime", title="Difference in Monthly Mortgage Payments between Median Listing and Rental Price of Single Family Residence in King Country", plot_height=350, plot_width=1200)
 p_delta_single.xgrid.grid_line_color=None
 p_delta_single.ygrid.grid_line_alpha=0.5
 p_delta_single.xaxis.axis_label = 'Time'
@@ -165,7 +165,7 @@ hover.tooltips=[
 ]
 p_delta_single.add_tools(hover)
 
-p_delta_condo = figure(x_axis_type="datetime", title="Difference in Monthly Mortgage Payments between Median Listing and Rental Price of a Condo in King Country", plot_height=350, plot_width=800)
+p_delta_condo = Figure(x_axis_type="datetime", title="Difference in Monthly Mortgage Payments between Median Listing and Rental Price of a Condo in King Country", plot_height=350, plot_width=800)
 p_delta_condo.xgrid.grid_line_color=None
 p_delta_condo.ygrid.grid_line_alpha=0.5
 p_delta_condo.xaxis.axis_label = 'Time'
@@ -178,7 +178,7 @@ hover.tooltips=[
 ]
 p_delta_condo.add_tools(hover)
 
-p_30y_mortg = figure(x_axis_type="datetime", title="30 years fixed mortgage rates from FMAC - national average", plot_height=350, plot_width=800)
+p_30y_mortg = Figure(x_axis_type="datetime", title="30 years fixed mortgage rates from FMAC - national average", plot_height=350, plot_width=800)
 p_30y_mortg.xgrid.grid_line_color=None
 p_30y_mortg.ygrid.grid_line_alpha=0.5
 p_30y_mortg.xaxis.axis_label = 'Time'
@@ -211,6 +211,8 @@ tab7=Panel(child=p_30y_mortg, title="30y-fixed mortgage rates")
 
 tabs = Tabs(tabs=[ tab1, tab2, tab3, tab4, tab5, tab6, tab7 ])
 
-show(tabs)
+curdoc().add_root(tabs)
+
+#show(tabs)
 
 #view(output_file)
