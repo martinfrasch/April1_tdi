@@ -11,10 +11,11 @@ from bokeh.models.widgets import Button, RadioButtonGroup, Select, RangeSlider,T
 from bokeh.models.tools import HoverTool
 from bokeh.models import NumeralTickFormatter
 from bokeh.util.browser import view
+import os
 
 #output_file("king_tdi.html")
 
-quandl.ApiConfig.api_key = os.environ['quandl_key']
+quandl.ApiConfig.api_key = os.environ.get('quandl_key')
 
 median_listing_price_singlehome = quandl.get('ZILLOW/M15_MLPSF',returns=np)
 median_listing_price_condo = quandl.get('ZILLOW/M15_MLPCC',returns=np)
