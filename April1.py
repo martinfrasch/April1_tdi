@@ -1,9 +1,3 @@
-
-# coding: utf-8
-
-# In[60]:
-
-
 #quandl-based capstone project
 import quandl
 import numpy as np
@@ -18,10 +12,9 @@ from bokeh.models.tools import HoverTool
 from bokeh.models import NumeralTickFormatter
 from bokeh.util.browser import view
 
-
 #output_file("king_tdi.html")
 
-quandl.ApiConfig.api_key = "YayxSPq-oifg3s46Bm5y"
+quandl.ApiConfig.api_key = os.environ['quandl_key']
 
 median_listing_price_singlehome = quandl.get('ZILLOW/M15_MLPSF',returns=np)
 median_listing_price_condo = quandl.get('ZILLOW/M15_MLPCC',returns=np)
